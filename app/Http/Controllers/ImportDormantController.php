@@ -20,7 +20,7 @@ class ImportDormantController extends Controller
     public function index()
     {
         $no = 1;
-        $data = Dormant::all();
+        $data = DB::table('dormants')->select('*')->get();
 
         return view('admin.dormant.index', compact('data'))->with(['no' => $no]);
     }
@@ -33,13 +33,12 @@ class ImportDormantController extends Controller
                 'file' => 'max:500000',
             ]);
 
-            $path1 = $request->file('file')->store('temp'); 
-            $path=storage_path('app').'/'.$path1;  
+            $path = $request->file('file')->getRealPath();
             $import = new DormantImport();
-            $import->onlySheets('Sheet1');
+            // $import->onlySheets('Sheet1');
             Excel::import($import, $path);
             //$data = Excel::selectSheetsByIndex(1)->load($path, function ($reader) { })->get();
-            dd($import);
+            //dd($import);
             //toastr()->success('Data imported successfully');
             return back()->with('success','Excel File Imported Successfully');
         }
