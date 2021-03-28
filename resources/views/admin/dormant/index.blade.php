@@ -48,7 +48,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle" style="color:black">Details :{{$row->client_id}} </h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle" style="color:black">Details : </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -56,8 +56,8 @@
                 <div class="modal-body">
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col-md-6"><h1> Mis Code:{{ $row->product}}</h1></div>
-                            <div class="col-md-6">Description:{{$row->setup}}</div>
+                            <div class="col-md-6"><h1> Mis Code:</h1></div>
+                            <div class="col-md-6">Description:</div>
                         </div>
                     </div>
                 </div>

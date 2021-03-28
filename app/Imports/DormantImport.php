@@ -26,8 +26,8 @@ class DormantImport implements ToModel, WithHeadingRow, WithBatchInserts, WithCh
 
     public function model(array $row)
     {
-       // DB::table('dormants')->truncate();
-        Dormant::truncate();
+       //DB::table('dormants')->truncate();
+        //Dormant::truncate();
 
         return new Dormant([
             'cust_ac_no'     => $row['cust_ac_no'],
@@ -62,11 +62,11 @@ class DormantImport implements ToModel, WithHeadingRow, WithBatchInserts, WithCh
 
     public function batchSize(): int
     {
-        return 5000;
+        return 1000;
     }
 
     public function chunkSize(): int
     {
-        return 5000;
+        return 1000;
     }
 }
