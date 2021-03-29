@@ -29,4 +29,9 @@ class BusinessUnit extends Model
         $records =  DB::table('business_units')->select('id','mis_code','description','bu','segment','code');
         return $records;
     }
+
+    public function segments()
+    {
+        return $this->hasMany(Segmentation::class);
+    }
 }

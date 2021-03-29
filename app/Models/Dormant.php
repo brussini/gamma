@@ -25,5 +25,10 @@ class Dormant extends Model
         'eti_bus_seg',
     ];
 
+    public function segments()
+    {
+        return $this->hasMany(Segmentation::class);
+    }
+
     
 }

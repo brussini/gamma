@@ -22,5 +22,10 @@ class DigitalProduct extends Model
         'setup',
     ];
 
+    public function segments()
+    {
+        return $this->hasMany(Segmentation::class);
+    }
+
     
 }

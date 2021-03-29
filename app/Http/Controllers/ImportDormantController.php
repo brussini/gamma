@@ -40,7 +40,7 @@ class ImportDormantController extends Controller
             //$data = Excel::selectSheetsByIndex(1)->load($path, function ($reader) { })->get();
             //dd($import);
             //toastr()->success('Data imported successfully');
-            return back()->with('success','Excel File Imported Successfully');
+            return back()->with('success','Excel File Processed in Queue');
         }
         else {
             //toastr()->error('Data Not imported');

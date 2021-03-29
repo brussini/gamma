@@ -47,7 +47,7 @@
             <a href="" class="nav-link">
             <i class="nav-icon fas fa-file-excel"></i>
               <p>
-              Importer Un Fichier 
+              Import Excel Files
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -70,14 +70,49 @@
                   <p>Importer Un Fichier DO</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="{{url('/import_seg')}}" class="nav-link">
+                <i class="nav-icon fas fa-file-excel"></i>
+                  <p>Importer Un Fichier SEG</p>
+                </a>
+              </li>
             </ul>
           </li>
-                    <li class="nav-item">
-                        <a href="{{url('customsearch')}}" class="nav-link">
-                            <i class="nav-icon fas fa-th"></i>
-                            <p>Filtrer les données</p>
-                        </a>
-                    </li>
+          <li class="nav-item has-treeview">
+            <a href="" class="nav-link">
+            <i class="nav-icon fas fa-file"></i>
+              <p>
+              Digitalization
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{url('/business')}}" class="nav-link">
+                <i class="nav-icon fas fa-file-excel"></i>
+                  <p>Business Units</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-file-excel"></i>
+                  <p>Digital Product</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-file-excel"></i>
+                  <p>Dormant</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-file-excel"></i>
+                  <p>Segmentation</p>
+                </a>
+              </li>
+            </ul>
+          </li>
                     <!--<li class="nav-item">
                             <a href="{{url('/chartjs')}}" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>

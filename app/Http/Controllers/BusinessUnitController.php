@@ -14,10 +14,14 @@ class BusinessUnitController extends Controller
      */
     public function index()
     {
-        $no = 1;
-        $data = BusinessUnit::all();
-
-        return view('index', compact('data'))->with(['no' => $no]);
+        if(request()->ajax()) {
+            return datatables()->of(BusinessUnit::select('*'))
+            ->addColumn('action', 'business.action')
+            ->rawColumns(['action'])
+            ->addIndexColumn()
+            ->make(true);
+            }
+            return view('admin.business.index');
     }
 
     /**

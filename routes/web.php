@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('business', [App\Http\Controllers\BusinessUnitController::class, 'index']);
+Route::post('delete-business', [BusinessUnitController::class,'destroy']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
@@ -31,3 +34,8 @@ Route::post('/import_dp/import', [App\Http\Controllers\ImportDigitalProductContr
 
 Route::get('/import_do', [App\Http\Controllers\ImportDormantController::class, 'index'])->name('dormant.index');
 Route::post('/import_do/import', [App\Http\Controllers\ImportDormantController::class, 'store']);
+
+Route::get('/import_seg', [App\Http\Controllers\ImportSegmentController::class, 'index'])->name('seg.index');
+Route::post('/import_seg/import', [App\Http\Controllers\ImportSegmentController::class, 'store']);
+
+

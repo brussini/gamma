@@ -35,5 +35,20 @@ class Segmentation extends Model
 
     ];
 
+    public function businessUnits()
+{
+    return $this->belongsTo(BusinessUnit::class, 'comp_mis_4');
+}
+
+public function dormant()
+{
+    return $this->belongsTo(Dormant::class, 'cust_ac_no');
+}
+
+public function digital()
+{
+    return $this->belongsTo(DigitalProduct::class, 'cust_no');
+}
+
     
 }
