@@ -16,7 +16,14 @@ class BusinessUnitController extends Controller
     {
         if(request()->ajax()) {
             return datatables()->of(BusinessUnit::select('*'))
-            ->addColumn('action', 'business.action')
+            ->addColumn('action', function($row){
+   
+                $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Edit" class="edit btn btn-primary btn-sm editBook">Edit</a>';
+
+                $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Delete" class="btn btn-danger btn-sm deleteBook">Delete</a>';
+
+                 return $btn;
+         })
             ->rawColumns(['action'])
             ->addIndexColumn()
             ->make(true);
@@ -42,7 +49,13 @@ class BusinessUnitController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        BusinessUnit::updateOrCreate(['mis_code' => $request->mis_code],
+                ['description' => $request->description, 
+                'bu' => $request->bu,
+                'segment'=> $request->segment,
+                'code'=> $request->code]);        
+   
+        return response()->json(['success'=>'BusinessUnit saved successfully.']);
     }
 
     /**
@@ -53,7 +66,7 @@ class BusinessUnitController extends Controller
      */
     public function show(BusinessUnit $businessUnit)
     {
-        //
+        
     }
 
     /**
@@ -62,9 +75,10 @@ class BusinessUnitController extends Controller
      * @param  \App\Models\BusinessUnit  $businessUnit
      * @return \Illuminate\Http\Response
      */
-    public function edit(BusinessUnit $businessUnit)
+    public function edit($id)
     {
-        //
+        $book = BusinessUnit::find($id);
+        return response()->json($book);
     }
 
     /**
@@ -85,8 +99,10 @@ class BusinessUnitController extends Controller
      * @param  \App\Models\BusinessUnit  $businessUnit
      * @return \Illuminate\Http\Response
      */
-    public function destroy(BusinessUnit $businessUnit)
+    public function destroy($id)
     {
-        //
+        BusinessUnit::find($id)->delete();
+     
+        return response()->json(['success'=>'BusinessUnit deleted successfully.']);
     }
 }

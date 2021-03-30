@@ -22,6 +22,9 @@ class SegmentImport implements ToModel, WithHeadingRow, WithBatchInserts, WithCh
     */
     public function model(array $row)
     {
+
+        //Segmentation::truncate();
+
         return new Segmentation([
             'br'     => $row['br'],
             'gl_code'      => $row['gl_code'],

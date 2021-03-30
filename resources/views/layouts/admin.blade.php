@@ -66,7 +66,163 @@
 
 
 
-
 </body>
+<script type="text/javascript">
+$(document).ready(function() {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $('#datatable-business').DataTable({
+        dom: 'Bfrtip',
+        'info': true,
+        /*buttons: [
+          'copy', 'csv', 'excel', 'pdf', 'print'
+        ],*/
+        buttons: [{
+          extend: 'excel',
+          text: '<span class="fa fa-file-excel-o"></span> Excel Export',
+          exportOptions: {
+            modifier: {
+              search: 'applied',
+              order: 'applied',
+              page : 'all'
+            }
+          }
+        }],
+        processing: true,
+        serverSide: true,
+        ajax: "{{ url('business') }}",
+        columns: [{
+                data: 'id',
+                name: 'id'
+            },
+            {
+                data: 'mis_code',
+                name: 'mis_code'
+            },
+            {
+                data: 'description',
+                name: 'description'
+            },
+            {
+                data: 'bu',
+                name: 'bu'
+            },
+            {
+                data: 'segment',
+                name: 'segment'
+            },
+            {
+                data: 'code',
+                name: 'code'
+            },
+            {
+                data: 'action',
+                name: 'action',
+                orderable: false
+            },
+        ],
+        order: [
+            [0, 'desc']
+        ]
+    });
+  var table =   $('#datatable_seg').DataTable({
+        dom: 'Bfrtip',
+        'info': true,
+        /*buttons: [
+          'copy', 'csv', 'excel', 'pdf', 'print'
+        ],*/
+        buttons: [{
+          extend: 'excel',
+          text: '<span class="fa fa-file-excel-o"></span> Excel Export',
+          exportOptions: {
+            modifier: {
+              search: 'applied',
+              order: 'applied',
+              page : 'all'
+            }
+          }
+        }],
+        processing: true,
+        serverSide: true,
+        ajax: "{{ url('segment') }}",
+        columns: [{
+                data: 'id',
+                name: 'id'
+            },
+            {
+                data: 'gl_code',
+                name: 'gl_code'
+            },
+            {
+                data: 'cust_ac_no',
+                name: 'cust_ac_no'
+            },
+            {
+                data: 'ac_desc',
+                name: 'ac_desc'
+            },
+            {
+                data: 'account_class',
+                name: 'account_class'
+            },
+            {
+                data: 'comp_mis_4',
+                name: 'comp_mis_4'
+            },
+            {
+                data: 'solde',
+                name: 'solde'
+            },
+            {
+                data: 'action',
+                name: 'action',
+                orderable: false
+            },
+        ],
+        order: [
+            [0, 'desc']
+        ]
+    });
+    $('body').on('click', '.delete', function() {
+        if (confirm("Delete Record?") == true) {
+            var id = $(this).data('id');
+            // ajax
+            $.ajax({
+                type: "POST",
+                url: "{{ url('delete-business') }}",
+                data: {
+                    id: id
+                },
+                dataType: 'json',
+                success: function(res) {
+                    var oTable = $('#datatable-crud').dataTable();
+                    oTable.fnDraw(false);
+                }
+            });
+        }
+    });
+    $('#createNewBusiness').click(function () {
+        $('#saveBtn').val("create-business");
+        $('#book_id').val('');
+        $('#businessForm').trigger("reset");
+        $('#modelHeading').html("Create New BU");
+        $('#ajaxModel').modal('show');
+    });
+    $('body').on('click', '.editBook', function () {
+      var book_id = $(this).data('id');
+      $.get("" +'/' + book_id +'/edit', function (data) {
+          $('#modelHeading').html("Edit Book");
+          $('#saveBtn').val("edit-book");
+          $('#ajaxModel').modal('show');
+          $('#book_id').val(data.id);
+          $('#title').val(data.title);
+          $('#author').val(data.author);
+      })
+   });
+});
+</script>
 
 </html>

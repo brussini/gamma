@@ -21,7 +21,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('business', [App\Http\Controllers\BusinessUnitController::class, 'index']);
-Route::post('delete-business', [BusinessUnitController::class,'destroy']);
+Route::get('segment', [App\Http\Controllers\ImportSegmentController::class, 'index']);
+Route::post('delete-business', [App\Http\Controllers\BusinessUnitController::class,'destroy']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 

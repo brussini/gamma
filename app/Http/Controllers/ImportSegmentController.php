@@ -17,10 +17,21 @@ class ImportSegmentController extends Controller
 {
     public function index()
     {
-        $no = 1;
-        $data = DB::table('segmentations')->select('*')->get();
+        if(request()->ajax()) {
+            return datatables()->of(Segmentation::select('*'))
+            ->addColumn('action', function($row){
+   
+                $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="View" class="edit btn btn-primary btn-sm editBook">View</a>';
 
-        return view('admin.seg.index', compact('data'))->with(['no' => $no]);
+
+                 return $btn;
+         })
+            ->rawColumns(['action'])
+            ->addIndexColumn()
+            ->make(true);
+            }
+
+        return view('admin.seg.index');
     }
     public function store(Request $request)
     {
