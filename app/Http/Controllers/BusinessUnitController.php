@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\BusinessUnit;
 use Illuminate\Http\Request;
+use Toastr;
 
 class BusinessUnitController extends Controller
 {
@@ -53,9 +54,11 @@ class BusinessUnitController extends Controller
                 ['description' => $request->description, 
                 'bu' => $request->bu,
                 'segment'=> $request->segment,
-                'code'=> $request->code]);        
+                'code'=> $request->code]);    
+                
+                Toastr::success('BU created', 'title', ['options']);
    
-        return response()->json(['success'=>'BusinessUnit saved successfully.']);
+        //return response()->json(['success'=>'BusinessUnit saved successfully.']);
     }
 
     /**

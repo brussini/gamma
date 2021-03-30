@@ -9,7 +9,7 @@ use Illuminate\Pagination\Paginator;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\DB;
 use \Maatwebsite\Excel\Validators\ValidationException;
-use toastr;
+use Toastr;
 use Excel;
 use Validator;
 
@@ -19,10 +19,21 @@ class ImportDormantController extends Controller
 
     public function index()
     {
-        $no = 1;
-        $data = DB::table('dormants')->select('*')->get();
+        if(request()->ajax()) {
+            return datatables()->of(Dormant::select('*'))
+            ->addColumn('action', function($row){
+   
+                $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="View" class="edit btn btn-primary btn-sm editBook">View</a>';
 
-        return view('admin.dormant.index', compact('data'))->with(['no' => $no]);
+
+                 return $btn;
+         })
+            ->rawColumns(['action'])
+            ->addIndexColumn()
+            ->make(true);
+            }
+
+        return view('admin.dormant.index');
     }
     public function store(Request $request)
     {
@@ -39,12 +50,13 @@ class ImportDormantController extends Controller
             Excel::import($import, $path);
             //$data = Excel::selectSheetsByIndex(1)->load($path, function ($reader) { })->get();
             //dd($import);
-            //toastr()->success('Data imported successfully');
-            return back()->with('success','Excel File Processed in Queue');
+            Toastr::success('DO File Imported', 'Success');
+
+            return back();
         }
         else {
-            //toastr()->error('Data Not imported');
-            return back()->with('error','An error occured');
+            Toastr::error('Error Occured', 'Error');
+            return back();
         }
     }
     public function count($data){

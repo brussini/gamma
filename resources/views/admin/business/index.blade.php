@@ -24,13 +24,7 @@
 
 <!-- Main content -->
 <section class="content">
-    <div style="margin-bottom: 10px;" class="row">
-        <div class="col-lg-12">
-            <a class="btn btn-success" href="">
-                Add @yield('title')
-            </a>
-        </div>
-    </div>
+
     <div class="card card-primary">
         <div class="card-header">
         </div>
@@ -79,24 +73,49 @@
             </div>
             <div class="modal-body">
                 <form id="businessForm" name="businessForm" class="form-horizontal">
-                   <input type="hidden" name="book_id" id="book_id">
+                    <input type="hidden" name="id" id="id">
                     <div class="form-group">
-                        <label for="name" class="col-sm-2 control-label">Title</label>
-                        <div class="col-sm-12">
-                            <input type="text" class="form-control" id="title" name="title" placeholder="Enter Title" value="" maxlength="50" required="">
+                        <div class="row">
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="name" class="col-md-4 control-label">MIS CODE</label>
+                                        <input type="text" class="form-control" id="mis_code" name="mis_code"
+                                            placeholder="Enter MIS CODE" value="" maxlength="50" required="">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="col-sm-2 control-label">DESCRIPTION</label>
+                                        <textarea id="description" name="description" required="" placeholder="Enter Description"
+                                            class="form-control"></textarea>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="name" class="col-sm-2 control-label">BU</label>
+                                        <input type="text" class="form-control" id="bu" name="bu"
+                                            placeholder="Enter BU" value="" maxlength="50" required="">
+                                    </div>
+                                    
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="name" class="col-sm-4 control-label">SEGMENT</label>
+                                        <input type="text" class="form-control" id="segment" name="segment"
+                                            placeholder="Enter Segment" value="" maxlength="50" required="">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="col-sm-2 control-label">CODE</label>
+                                        <textarea id="code" name="code" required="" placeholder="Enter Code"
+                                            class="form-control"></textarea>
+                                    </div>
+                                   
+                                    
+                                </div>
+                            </div>
                         </div>
                     </div>
-     
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Details</label>
-                        <div class="col-sm-12">
-                            <textarea id="author" name="author" required="" placeholder="Enter Author" class="form-control"></textarea>
-                        </div>
-                    </div>
-      
+
                     <div class="col-sm-offset-2 col-sm-10">
-                     <button type="submit" class="btn btn-primary" id="saveBtn" value="create">Save changes
-                     </button>
+                        <button type="submit" class="btn btn-primary" id="saveBtn" value="create">Save changes
+                        </button>
                     </div>
                 </form>
             </div>

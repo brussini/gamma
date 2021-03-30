@@ -9,7 +9,7 @@ use Illuminate\Pagination\Paginator;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\DB;
 use \Maatwebsite\Excel\Validators\ValidationException;
-use toastr;
+use Toastr;
 use Excel;
 use Validator;
 
@@ -48,12 +48,13 @@ class ImportSegmentController extends Controller
             Excel::import($import, $path);
             //$data = Excel::selectSheetsByIndex(1)->load($path, function ($reader) { })->get();
             //dd($import);
-            //toastr()->success('Data imported successfully');
-            return back()->with('success','Excel File Processed in Queue');
+            Toastr::success('Excel File Processed in Queue', 'Success');
+
+            return back();
         }
         else {
-            //toastr()->error('Data Not imported');
-            return back()->with('error','An error occured');
+            Toastr::error('Error Occured', 'Error');
+            return back();
         }
     }
     public function count($data){

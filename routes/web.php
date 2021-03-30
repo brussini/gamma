@@ -1,7 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers;
+use App\Http\Controllers\BusinessUnitController;
+use App\Http\Controllers\ImportBuController;
+use App\Http\Controllers\ImportDigitalProductController;
+use App\Http\Controllers\ImportDormantController;
+use App\Http\Controllers\ImportSegmentController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -19,9 +24,15 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+// Logged-in users - with "auth" middleware
+Route::prefix("")->group(function () {
+
+
+Route::resource('business', BusinessUnitController::class);
 
 Route::get('business', [App\Http\Controllers\BusinessUnitController::class, 'index']);
 Route::get('segment', [App\Http\Controllers\ImportSegmentController::class, 'index']);
+Route::get('dormant', [App\Http\Controllers\ImportDormantController::class, 'index']);
 Route::post('delete-business', [App\Http\Controllers\BusinessUnitController::class,'destroy']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -39,4 +50,4 @@ Route::post('/import_do/import', [App\Http\Controllers\ImportDormantController::
 Route::get('/import_seg', [App\Http\Controllers\ImportSegmentController::class, 'index'])->name('seg.index');
 Route::post('/import_seg/import', [App\Http\Controllers\ImportSegmentController::class, 'store']);
 
-
+});

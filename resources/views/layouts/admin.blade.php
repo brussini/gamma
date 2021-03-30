@@ -59,6 +59,7 @@
 <!-- ChartJS -->
 <script src="{{ asset('plugins/chart.js/Chart.min.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+{!! Toastr::message() !!}
 
 <!-- PAGE SCRIPTS -->
 <!--<script src="{{ asset('dist/js/pages/dashboard2.js') }}"></script>-->
@@ -128,7 +129,7 @@ $(document).ready(function() {
             [0, 'desc']
         ]
     });
-  var table =   $('#datatable_seg').DataTable({
+   $('#datatable_seg').DataTable({
         dom: 'Bfrtip',
         'info': true,
         /*buttons: [
@@ -212,17 +213,88 @@ $(document).ready(function() {
         $('#ajaxModel').modal('show');
     });
     $('body').on('click', '.editBook', function () {
-      var book_id = $(this).data('id');
+      var id = $(this).data('id');
       $.get("" +'/' + book_id +'/edit', function (data) {
           $('#modelHeading').html("Edit Book");
-          $('#saveBtn').val("edit-book");
+          $('#saveBtn').val("edit-business");
           $('#ajaxModel').modal('show');
-          $('#book_id').val(data.id);
-          $('#title').val(data.title);
-          $('#author').val(data.author);
+          $('#id').val(data.id);
+          $('#mis_code').val(data.mis_code);
+          $('#description').val(data.description);
+          $('#bu').val(data.bu);
+          $('#segment').val(data.segment);
+          $('#code').val(data.code);
       })
    });
 });
 </script>
+<script type="text/javascript"> 
+$(document).ready(function() {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+$('#datatable_do').DataTable({
+        dom: 'Bfrtip',
+        'info': true,
+        /*buttons: [
+          'copy', 'csv', 'excel', 'pdf', 'print'
+        ],*/
+        buttons: [{
+          extend: 'excel',
+          text: '<span class="fa fa-file-excel-o"></span> Excel Export',
+          exportOptions: {
+            modifier: {
+              search: 'applied',
+              order: 'applied',
+              page : 'all'
+            }
+          }
+        }],
+        processing: true,
+        serverSide: true,
+        ajax: "{{ url('dormant') }}",
+        columns: [{
+                data: 'id',
+                name: 'id'
+            },
+            {
+                data: 'branch_code',
+                name: 'branch_code'
+            },
+            {
+                data: 'cust_ac_no',
+                name: 'cust_ac_no'
+            },
+            {
+                data: 'ac_desc',
+                name: 'ac_desc'
+            },
+            {
+                data: 'cif',
+                name: 'cif'
+            },
+            {
+                data: 'ac_stat_dormant',
+                name: 'ac_stat_dormant'
+            },
+            {
+                data: 'eti_bus_seg',
+                name: 'eti_bus_seg'
+            },
+            {
+                data: 'action',
+                name: 'action',
+                orderable: false
+            },
+        ],
+        order: [
+            [0, 'desc']
+        ]
+    });
+});
+</script>
+
 
 </html>

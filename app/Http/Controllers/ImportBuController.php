@@ -8,7 +8,7 @@ use App\Models\BusinessUnit;
 use Illuminate\Pagination\Paginator;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\DB;
-use toastr;
+use Toastr;
 use Excel;
 
 class ImportBuController extends Controller
@@ -35,12 +35,14 @@ class ImportBuController extends Controller
             Excel::import($import, $path);
             //$data = Excel::selectSheetsByIndex(1)->load($path, function ($reader) { })->get();
             //dd($data);
-            //toastr()->success('Data imported successfully');
-            return back()->with('success','Excel File Imported Successfully');
+            Toastr::success('BU File Imported', 'Success');
+
+            return back();
         }
         else {
             //toastr()->error('Data Not imported');
-            return back()->with('error','An error occured');
+            Toastr::error('error occured', 'title', ['options']);
+            return back();
         }
     }
     public function count($data){
