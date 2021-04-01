@@ -30,7 +30,7 @@ Route::prefix("")->group(function () {
 
 Route::resource('business', BusinessUnitController::class);
 
-Route::get('business', [App\Http\Controllers\BusinessUnitController::class, 'index']);
+Route::get('business', [App\Http\Controllers\BusinessUnitController::class, 'index'])->name('business.index');
 Route::get('segment', [App\Http\Controllers\ImportSegmentController::class, 'index']);
 Route::get('dormant', [App\Http\Controllers\ImportDormantController::class, 'index']);
 Route::post('delete-business', [App\Http\Controllers\BusinessUnitController::class,'destroy']);

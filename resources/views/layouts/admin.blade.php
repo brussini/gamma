@@ -187,35 +187,17 @@ $(document).ready(function() {
             [0, 'desc']
         ]
     });
-    $('body').on('click', '.delete', function() {
-        if (confirm("Delete Record?") == true) {
-            var id = $(this).data('id');
-            // ajax
-            $.ajax({
-                type: "POST",
-                url: "{{ url('delete-business') }}",
-                data: {
-                    id: id
-                },
-                dataType: 'json',
-                success: function(res) {
-                    var oTable = $('#datatable-crud').dataTable();
-                    oTable.fnDraw(false);
-                }
-            });
-        }
-    });
     $('#createNewBusiness').click(function () {
         $('#saveBtn').val("create-business");
-        $('#book_id').val('');
+        $('#id').val('');
         $('#businessForm').trigger("reset");
-        $('#modelHeading').html("Create New BU");
+        $('#modelHeading').html("Create New Business");
         $('#ajaxModel').modal('show');
     });
-    $('body').on('click', '.editBook', function () {
-      var id = $(this).data('id');
-      $.get("" +'/' + book_id +'/edit', function (data) {
-          $('#modelHeading').html("Edit Book");
+    $('body').on('click', '.editBusiness', function () {
+      var book_id = $(this).data('id');
+      $.get("{{ route('business.index') }}" +'/' + id +'/edit', function (data) {
+          $('#modelHeading').html("Edit Business");
           $('#saveBtn').val("edit-business");
           $('#ajaxModel').modal('show');
           $('#id').val(data.id);
@@ -226,6 +208,46 @@ $(document).ready(function() {
           $('#code').val(data.code);
       })
    });
+    $('#saveBtn').click(function (e) {
+        e.preventDefault();
+        $(this).html('Save');
+    
+        $.ajax({
+          data: $('#businessForm').serialize(),
+          url: "{{ route('business.store') }}",
+          type: "POST",
+          dataType: 'json',
+          success: function (data) {
+     
+              $('#businessForm').trigger("reset");
+              $('#ajaxModel').modal('hide');
+              table.draw();
+         
+          },
+          error: function (data) {
+              console.log('Error:', data);
+              $('#saveBtn').html('Save Changes');
+          }
+      });
+    });
+    
+    $('body').on('click', '.deleteBusiness', function () {
+     
+        var id = $(this).data("id");
+        confirm("Are You sure want to delete !");
+      
+        $.ajax({
+            type: "DELETE",
+            url: "{{ route('business.store') }}"+'/'+id,
+            success: function (data) {
+                table.draw();
+            },
+            error: function (data) {
+                console.log('Error:', data);
+            }
+        });
+    });
+     
 });
 </script>
 <script type="text/javascript"> 

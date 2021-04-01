@@ -26,7 +26,7 @@ class DormantImport implements ToModel, WithHeadingRow, WithBatchInserts, WithCh
 
     public function model(array $row)
     {
-       //DB::table('dormants')->truncate();
+       //DB::table('dormants')->delete();
        // Dormant::truncate();
 
         return new Dormant([
