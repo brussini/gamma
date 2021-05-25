@@ -4,7 +4,7 @@ namespace App\Imports;
 
 use App\Models\DigitalProduct;
 use Illuminate\Support\Collection;
-use Maatwebsite\Excel\Concerns\ToCollection;
+use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 use Maatwebsite\Excel\Concerns\WithConditionalSheets;
@@ -15,29 +15,18 @@ use DB;
 
 
 
-class DigitalProductImport implements ToCollection, WithHeadingRow, WithBatchInserts, WithChunkReading, WithMultipleSheets, ShouldQueue
+class DigitalProductImport implements ToModel, WithHeadingRow, WithBatchInserts, WithChunkReading, ShouldQueue
 {
-    use WithConditionalSheets;
+    
 
-    public function conditionalSheets(): array
+    public function model(array $rows)
     {
-        return [
-            'DigitalProduct' => new DigitalProductImport()
-        ];
-    }
-
-    public function collection(Collection $rows)
-    {
-        foreach ($rows as $row) 
-        {
-            DigitalProduct::updateOrcreate([            
-            'client_id'     => $row['clientid']
-            ],[    
-                                'product'      => $row['product'],
-                                'setup' => $row['setup'],
-            
-            ]);
-        }
+        
+        return new DigitalProduct([
+            'client_id'     => $row['clientid'],
+            'product'      => $row['product'],
+            'setup' => $row['setup']
+        ]);
 
     }
 

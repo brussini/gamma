@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
 
 class HomeController extends Controller
 {
@@ -23,6 +24,11 @@ class HomeController extends Controller
      */
     public function index()
     {
+
+        // $multipleUnion = DB::table('segmentations')->union(DB::table('business_units'))
+        //  ->union(DB::table('digital_products'))->union(DB::table('dormants'))->get();
+
+        // dd($multipleUnion);
         return view('home');
     }
 }

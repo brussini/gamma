@@ -29,13 +29,14 @@ class ImportDigitalProductController extends Controller
                 'file_dp'   => 'required|mimes:xls,xlsx'
             ]);
 
+            DB::table('digital_products')->truncate();
+
             $path = $request->file('file_dp')->getRealPath();
             $import = new DigitalProductImport();
-            $import->onlySheets('Sheet1');
             Excel::import($import, $path);
             //$data = Excel::selectSheetsByIndex(1)->load($path, function ($reader) { })->get();
             //dd($data);
-            Toastr::success('DP File Imported', 'Success');
+            Toastr::success('DP File Processed in Queue', 'Success');
 
             return back();
         }
