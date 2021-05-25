@@ -44,13 +44,15 @@ class ImportDormantController extends Controller
                 'file' => 'max:500000',
             ]);
 
+            DB::table('dormants')->truncate();
+
             $path = $request->file('file')->getRealPath();
             $import = new DormantImport();
             // $import->onlySheets('Sheet1');
             Excel::import($import, $path);
             //$data = Excel::selectSheetsByIndex(1)->load($path, function ($reader) { })->get();
             //dd($import);
-            Toastr::success('DO File Imported', 'Success');
+            Toastr::success('DO File Processed in Queue', 'Success');
 
             return back();
         }

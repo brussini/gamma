@@ -42,6 +42,8 @@ class ImportSegmentController extends Controller
                 'file_seg' => 'max:500000',
             ]);
 
+            DB::table('segmentations')->truncate();
+
             $path = $request->file('file_seg')->getRealPath();
             $import = new SegmentImport();
             // $import->onlySheets('Sheet1');

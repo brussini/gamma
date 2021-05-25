@@ -318,5 +318,120 @@ $('#datatable_do').DataTable({
 });
 </script>
 
+<script type="text/javascript"> 
+$(document).ready(function() {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+$('#datatable-digital').DataTable({
+        dom: 'Bfrtip',
+        'info': true,
+        /*buttons: [
+          'copy', 'csv', 'excel', 'pdf', 'print'
+        ],*/
+        buttons: [{
+          extend: 'excel',
+          text: '<span class="fa fa-file-excel-o"></span> Excel Export',
+          exportOptions: {
+            modifier: {
+              search: 'applied',
+              order: 'applied',
+              page : 'all'
+            }
+          }
+        }],
+        processing: true,
+        serverSide: true,
+        ajax: "{{ url('digital') }}",
+        columns: [{
+                data: 'id',
+                name: 'id'
+            },
+            {
+                data: 'client_id',
+                name: 'client_id'
+            },
+            {
+                data: 'product',
+                name: 'product'
+            },
+            {
+                data: 'setup',
+                name: 'setup'
+            },
+            {
+                data: 'action',
+                name: 'action',
+                orderable: false
+            },
+        ],
+        order: [
+            [0, 'desc']
+        ]
+    });
+    $('#createNewDigital').click(function () {
+        $('#saveBtn').val("create-digital");
+        $('#client_id').val('');
+        $('#digitalForm').trigger("reset");
+        $('#modelHeading').html("Create New DigitalProduct");
+        $('#ajaxModel').modal('show');
+    });
+
+    $('body').on('click', '.editDigital', function () {
+      var id = $(this).data('id');
+      $.get("" +'/' + id +'/edit', function (data) {
+          $('#modelHeading').html("Edit Digital");
+          $('#saveBtn').val("edit-digital");
+          $('#ajaxModel').modal('show');
+          $('#client_id').val(data.client_id);
+          $('#product').val(data.product);
+          $('#setup').val(data.setup);
+      })
+   });
+
+    $('#saveBtn').click(function (e) {
+        e.preventDefault();
+        $(this).html('Sending..');
+
+        $.ajax({
+          data: $('#digitalForm').serialize(),
+          url: "",
+          type: "POST",
+          dataType: 'json',
+          success: function (data) {
+
+              $('#digitalForm').trigger("reset");
+              $('#ajaxModel').modal('hide');
+              table.draw();
+
+          },
+          error: function (data) {
+              console.log('Error:', data);
+              $('#saveBtn').html('Save Changes');
+          }
+      });
+    });
+
+    $('body').on('click', '.deleteDigital', function () {
+
+        var id = $(this).data("id");
+        confirm("Are You sure want to delete !");
+
+        $.ajax({
+            type: "DELETE",
+            url: "{{ route('digital.store') }}"+'/'+id,
+            success: function (data) {
+                table.draw();
+            },
+            error: function (data) {
+                console.log('Error:', data);
+            }
+        });
+    });
+});
+</script>
+
 
 </html>

@@ -60,62 +60,26 @@
     </form>
 
     <br />
-    @foreach ($data as $row)
-    <div class="modal fade" id="exampleModalCenter{{$row->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle" style="color:black">Details :{{$row->client_id}} </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-6"><h1> Mis Code:{{ $row->product}}</h1></div>
-                            <div class="col-md-6">Description:{{$row->setup}}</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    @endforeach
+    
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">Digital Product</h3></br>
-            <span style="text-align:right">Number of rows:{{ count($data)}}</span>
+            <span style="text-align:right"></span>
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                @if (count($data) > 0)
-                <table id="datatable" class="table table-striped table-bordered">
+                <table id="datatable-digital" class="table table-striped table-bordered">
                     <thead>
                         <tr>
                             <th>ID</th>
                             <th>Client ID</th>
                             <th>Product</th>
                             <th>Setup</th>
+                            <th>Action</th>
                            
                         </tr>
                     </thead>
-                    <tbody>
-                        @foreach($data as $row)
-                        <tr>
-                            <td>{{$no++}}</td>
-                            <td>{{ $row->client_id }}</td>
-                            <td>{{ $row->product }}</td>
-                            <td>{{ $row->setup }}</td>
-                            <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalCenter{{$row->id}}">View</button></td>
-                        </tr>
-                        @endforeach
-                    </tbody>
                 </table>
-                @endif
             </div>
         </div>
     </div>

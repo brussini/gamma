@@ -94,7 +94,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{url('/digital')}}" class="nav-link">
                 <i class="nav-icon fas fa-file-excel"></i>
                   <p>Digital Product</p>
                 </a>

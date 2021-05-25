@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BusinessUnitController;
+use App\Http\Controllers\DigitalProductController;
 use App\Http\Controllers\ImportBuController;
 use App\Http\Controllers\ImportDigitalProductController;
 use App\Http\Controllers\ImportDormantController;
@@ -29,6 +30,7 @@ Route::prefix("")->group(function () {
 
 
 Route::resource('business', BusinessUnitController::class);
+Route::resource('digital', DigitalProductController::class);
 
 Route::get('business', [App\Http\Controllers\BusinessUnitController::class, 'index'])->name('business.index');
 Route::get('segment', [App\Http\Controllers\ImportSegmentController::class, 'index']);

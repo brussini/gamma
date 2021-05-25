@@ -31,7 +31,7 @@ class ImportDigitalProductController extends Controller
 
             $path = $request->file('file_dp')->getRealPath();
             $import = new DigitalProductImport();
-            $import->onlySheets('DigitalProduct');
+            $import->onlySheets('Sheet1');
             Excel::import($import, $path);
             //$data = Excel::selectSheetsByIndex(1)->load($path, function ($reader) { })->get();
             //dd($data);

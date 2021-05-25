@@ -10,8 +10,12 @@ use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 use Maatwebsite\Excel\Concerns\WithConditionalSheets;
 use Maatwebsite\Excel\Concerns\WithBatchInserts;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use DB;
 
-class DigitalProductImport implements ToCollection, WithHeadingRow, WithBatchInserts, WithChunkReading, WithMultipleSheets
+
+
+class DigitalProductImport implements ToCollection, WithHeadingRow, WithBatchInserts, WithChunkReading, WithMultipleSheets, ShouldQueue
 {
     use WithConditionalSheets;
 
