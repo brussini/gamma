@@ -162,6 +162,10 @@ $(document).ready(function() {
                 name: 'cust_ac_no'
             },
             {
+                data: 'cust_no',
+                name: 'cust_no'
+            },
+            {
                 data: 'ac_desc',
                 name: 'ac_desc'
             },

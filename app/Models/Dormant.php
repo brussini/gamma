@@ -30,5 +30,10 @@ class Dormant extends Model
         return $this->hasMany(Segmentation::class);
     }
 
+    public function products()
+    {
+        return $this->hasOne(DigitalProduct::class, 'client_id', 'cif');
+    }
+
     
 }

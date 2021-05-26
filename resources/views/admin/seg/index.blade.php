@@ -71,6 +71,7 @@
                             <th>ID</th>
                             <th>GL Code</th>
                             <th>CUST AC NO</th>
+                            <th>CUST NO</th>
                             <th>AC DESC</th>
                             <th>ACC Class</th>
                             <th>COMP MIS 4</th>
